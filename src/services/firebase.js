@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile
 } from "firebase/auth";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -32,6 +33,9 @@ const signup = async (name, email, password, navigate) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
+
+    await updateProfile(user,{displayName:name})
+
 
     // Store user in Firestore
     await addDoc(collection(db, "users"), {

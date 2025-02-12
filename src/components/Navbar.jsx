@@ -10,6 +10,8 @@ export default function Navbar() {
   const [searchItem, setSearchItem] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  console.log('user is', user);
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchItem.trim()) {
@@ -75,7 +77,7 @@ export default function Navbar() {
           <div className="flex items-center space-x-6">
             {user ? (
               <>
-                <span className="text-gray-700 font-semibold">{user.email}</span>
+                <span className="text-gray-700 font-semibold">{user.displayName || user.email}</span>
                 <button
                   onClick={handleLogout}
                   className="bg-red-500 text-white px-4 py-2 rounded-full cursor-pointer"
@@ -154,7 +156,7 @@ export default function Navbar() {
             <div className="flex flex-col space-y-4">
               {user ? (
                 <>
-                  <span className="text-gray-700 font-semibold">{user.email}</span>
+                  <span className="text-gray-700 font-semibold">{user.displayName || user.email}</span>
                   <button
                     onClick={handleLogout}
                     className="bg-red-500 text-white px-4 py-2 rounded-full cursor-pointer w-full"

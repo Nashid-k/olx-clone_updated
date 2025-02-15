@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { FaWhatsapp, FaShoppingCart } from "react-icons/fa";
+import { BadgeDollarSign } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const location = useLocation();
   const product = location.state?.product;
+  const [formattedDate, setFormattedDate] = useState("");
+
+  useEffect(() => {
+    if (product?.createdAt) {
+      const date = new Date(product.createdAt.seconds * 1000);
+      const formatted = date.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+      setFormattedDate(formatted);
+    }
+  }, [product]);
+  
 
   if (!product) {
     return <p className="text-center text-gray-500">Product not found.</p>;
+  }
+
+  const capitalizedName = (name)=>{
+    if(!name){
+        return 'Anonymous'
+    }else{
+        return name.charAt(0).toUpperCase()+name.slice(1);
+    }
   }
 
   return (
@@ -36,18 +59,22 @@ export default function ProductDetails() {
             {/* Seller Info */}
             <div className="mt-6 bg-gray-100 p-4 rounded-lg shadow-sm">
               <h3 className="text-lg font-semibold text-gray-900">Seller Information</h3>
-              <p className="text-gray-700 mt-2">
-                <span className="font-semibold">Name:</span> {product.username || "Seller"}
-              </p>
-              <p className="text-gray-600">Member since {product.joinedDate || "Unknown"}</p>
+              <div className="mt-2 space-y-1">
+                <p className="text-gray-700">
+                  <span className="font-semibold">Seller:</span> {capitalizedName(product.sellerName )}
+                </p>
+                <p className="text-gray-700">
+                  <span className="font-semibold">Posted on:</span> {formattedDate || "Recently"}
+                </p>
+              </div>
 
               {/* Chat & Buy Buttons */}
               <div className="mt-4 flex flex-col sm:flex-row gap-4">
                 <button className="flex-1 flex items-center justify-center gap-2 bg-green-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-green-600 transition cursor-pointer">
-                  <FaWhatsapp size={18} /> Chat Now
+                  <FaWhatsapp size={18} /> Chat with seller
                 </button>
                 <button className="flex-1 flex items-center justify-center gap-2 bg-blue-600 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700 transition cursor-pointer">
-                  <FaShoppingCart size={18} /> Buy Now
+                  <BadgeDollarSign className="w-5 h-5" /> Make an offer
                 </button>
               </div>
             </div>

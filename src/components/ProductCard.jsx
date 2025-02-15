@@ -11,6 +11,10 @@ export default function ProductCard({ product }) {
     navigate(`/product/${product.id}`, { state: { product } });
   };
 
+  const capitalizedSeller = (name) => {
+    return name ? name.charAt(0).toUpperCase() + name.slice(1) : "Seller";
+  };
+
   return (
     <div 
       className="bg-white rounded-lg border border-gray-300 shadow-sm hover:shadow-lg transition-shadow duration-200 w-full max-w-[280px] cursor-pointer"
@@ -42,7 +46,7 @@ export default function ProductCard({ product }) {
           {product.description}
         </p>
         <div className="flex justify-between items-center mt-2 text-xs text-gray-500">
-          <span className="truncate max-w-[45%]">{product.username || "Seller"}</span>
+          <span className="truncate max-w-[45%]">{capitalizedSeller(product.sellerName)}</span>
           <span className="truncate max-w-[45%]">{product.location || "Unknown"}</span>
         </div>
       </div>

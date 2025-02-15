@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { useLocation } from "react-router-dom";
 
@@ -15,7 +15,8 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "products"));
+        const productsQuery = query(collection(db, "products"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(productsQuery);
         const dataList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),

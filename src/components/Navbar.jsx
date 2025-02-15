@@ -31,8 +31,12 @@ export default function Navbar() {
   };
 
   const goToSell = () => {
-    navigate('/sell');
-    setIsMobileMenuOpen(false);
+     if(!user){
+      navigate('/login')
+     }else{
+      navigate('/sell');
+      setIsMobileMenuOpen(false);
+     }
   };
 
   return (
@@ -68,7 +72,7 @@ export default function Navbar() {
               placeholder="Find Cars, Mobile Phones and more..."
               className="p-2 flex-grow outline-none text-sm text-gray-700"
             />
-            <button className="bg-blue-500 px-4 py-2 text-white flex items-center justify-center"
+            <button className="bg-blue-500 px-4 py-2 text-white flex items-center justify-center cursor-pointer"
               type="submit">
               <FaSearch />
             </button>
@@ -147,7 +151,7 @@ export default function Navbar() {
                 placeholder="Find Cars, Mobile Phones and more..."
                 className="p-2 flex-grow outline-none text-sm text-gray-700"
               />
-              <button className="bg-blue-500 px-4 py-2 text-white flex items-center justify-center"
+              <button className="bg-blue-500 px-4 py-2 text-white flex items-center justify-center cursor-pointer"
                 type="submit">
                 <FaSearch />
               </button>

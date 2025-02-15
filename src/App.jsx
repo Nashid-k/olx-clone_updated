@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Sell from "./pages/Sell";
+import ProductDetails from "./pages/ProductDetails";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route element={<Layout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/sell" element={<Sell />} />
 
         </Route>

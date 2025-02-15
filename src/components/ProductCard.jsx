@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
   const formattedPrice = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 }).format(product.price);
 
+  const handleClick = () => {
+    navigate(`/product/${product.id}`, { state: { product } });
+  };
+
   return (
-    <div className="bg-white rounded-lg border border-gray-300 shadow-sm hover:shadow-lg transition-shadow duration-200 w-full max-w-[280px] cursor-pointer">
+    <div 
+      className="bg-white rounded-lg border border-gray-300 shadow-sm hover:shadow-lg transition-shadow duration-200 w-full max-w-[280px] cursor-pointer"
+      onClick={handleClick}
+    >
       <div className="relative pb-[75%]">
         <img 
           src={product.imageUrl} 

@@ -5,11 +5,11 @@ import Footer from './Footer';
 
 export default function Layout() {
   const location = useLocation();
-  const showFooter = ['/home', '/sell'].includes(location.pathname);
+  const showFooter = ['/home', '/sell'].includes(location.pathname) || location.pathname.startsWith('/product/');
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar /> 
       <main className="flex-grow">
         <Outlet />
       </main>

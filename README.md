@@ -348,13 +348,7 @@ This project demonstrates proficiency in:
 ## 🔮 Future Enhancements
 
 - [ ] **Search Filters** - Advanced filtering by price, location, category
-- [ ] **Location Services** - GPS-based location detection and nearby products
-- [ ] **Messaging System** - In-app chat between buyers and sellers
-- [ ] **Rating System** - User ratings and reviews for sellers
-- [ ] **Payment Integration** - Secure payment processing for transactions
-- [ ] **Push Notifications** - Notify users about new products and messages
 - [ ] **Advanced Search** - Search with multiple criteria and sorting options
-- [ ] **Product Comparison** - Compare similar products side by side
 
 ---
 
